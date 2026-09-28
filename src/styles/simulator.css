@@ -1,0 +1,41 @@
+/* ------------------------------------------------------------
+   Mission Control / simulator surfaces
+   ------------------------------------------------------------ */
+.sim-canvas {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  cursor: crosshair;
+  background: #050912;
+  touch-action: manipulation;
+}
+
+.bar-track { height: 6px; border-radius: 6px; background: #111a30; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width 0.2s linear; }
+
+.terminal {
+  background: #02040a;
+  border: 1px solid #13203a;
+  border-radius: 14px;
+}
+.terminal-out {
+  height: 420px;
+  overflow-y: auto;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+@media (max-width: 640px) {
+  .terminal-out { height: 320px; font-size: 12px; }
+}
+.terminal-line { white-space: pre-wrap; word-break: break-word; }
+
+.event-log {
+  height: 10rem;
+  overflow-y: auto;
+  font-size: 11px;
+  line-height: 1.6;
+  background: #040710;
+  border: 1px solid #111a30;
+  border-radius: 10px;
+  padding: 0.5rem;
+}

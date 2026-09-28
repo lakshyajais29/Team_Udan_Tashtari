@@ -1,0 +1,85 @@
+/* ------------------------------------------------------------
+   Motion — kept subtle; all disabled under reduced-motion
+   ------------------------------------------------------------ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); }
+  50% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+}
+@keyframes scan {
+  to { top: 120%; }
+}
+@keyframes dash { to { background-position: 32px 0; } }
+@keyframes dashv { to { background-position: 0 24px; } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+
+.fade-up { animation: fadeUp 0.5s ease both; }
+.pulse-dot { animation: pulseDot 1.8s ease-in-out infinite; }
+.cursor-blink { animation: blink 1s step-end infinite; }
+.spin-slow { animation: spinSlow 18s linear infinite; }
+
+/* Scan-line sweep overlay for panels */
+.scan { position: relative; overflow: hidden; }
+.scan::after {
+  content: '';
+  position: absolute; left: 0; right: 0; top: -40%; height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.06), transparent);
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Animated data links in the architecture diagram */
+.flow-link {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--cyan) 0 8px, transparent 8px 16px);
+  background-size: 32px 2px;
+  animation: dash 1s linear infinite;
+}
+.flow-link-v {
+  width: 2px; height: 32px; margin: 0 auto;
+  background: repeating-linear-gradient(180deg, var(--cyan) 0 6px, transparent 6px 12px);
+  background-size: 2px 24px;
+  animation: dashv 1s linear infinite;
+}
+
+/* Scroll-reveal (driven by useReveal hook) */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Modal */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 80;
+  background: rgba(2, 4, 10, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  animation: fadeUp 0.2s ease both;
+}
+.modal-card {
+  width: 100%; max-width: 680px; max-height: 88vh; overflow-y: auto;
+  animation: fadeUp 0.3s ease both;
+}
+
+/* Sponsor tiers */
+.tier { transition: all 0.35s ease; }
+.tier.locked { opacity: 0.4; filter: grayscale(0.6); }
+.tier.unlocked { border-color: rgba(34, 211, 238, 0.6); box-shadow: 0 0 30px -10px rgba(34, 211, 238, 0.5); }
+
+/* Spec value swap */
+.spec-val { transition: opacity 0.25s ease, transform 0.25s ease; }
+.spec-val.swap { opacity: 0; transform: translateY(-4px); }
+
+/* Mobile nav slide */
+.mnav-enter { animation: fadeUp 0.25s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
